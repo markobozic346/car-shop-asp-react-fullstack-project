@@ -17,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<CarService>();
+builder.Services.AddScoped<ServiceService>();
 
 // Configure JWT authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -39,6 +41,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddAuthorization(); // Add authorization services
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,7 +54,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors("AllowAnyOrigin"); // Enable CORS before other middleware.
+app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // Enable CORS before other middleware.
+
 app.UseAuthentication(); // Use authentication middleware before authorization.
 app.UseAuthorization();
 
