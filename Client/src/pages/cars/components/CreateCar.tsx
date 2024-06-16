@@ -1,39 +1,22 @@
-import { Button } from "@/components/ui/button";
-import { MUTATION_KEYS } from "@/lib/constants";
-import { createCar } from "@/lib/mutations";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { PlusIcon } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
+import AddNewCarModal from "@/components/modals/AddNewCarModal";
+
 const CreateCar = () => {
-  const { mutate, isPending, isError } = useMutation({
-    mutationFn: createCar,
-    mutationKey: [MUTATION_KEYS.CREATE_CAR],
-  });
+  const [isNewOpen, setNewOpen] = useState(false);
 
   const handleCreate = () => {
-    mutate({
-      car: {
-        model: "Giulietta",
-        make: "Alfa Romeo",
-        year: 2013,
-        carBodyId: 4,
-      },
-    });
+    setNewOpen(true);
   };
-
-  if (isError) {
-    return <div>Something went wrong</div>;
-  }
-
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
   return (
     <div>
       <Button className="flex gap-2" onClick={handleCreate}>
         Add new car
         <PlusIcon />
       </Button>
+      <AddNewCarModal open={isNewOpen} onOpenChange={setNewOpen} />
     </div>
   );
 };

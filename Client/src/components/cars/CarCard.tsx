@@ -7,6 +7,8 @@ import { Button } from "../ui/button";
 import { deleteCar } from "@/lib/mutations";
 import { toast } from "sonner";
 import { queryClient } from "@/routes/__root";
+import { useState } from "react";
+import EditCarModal from "../modals/EditCarModal";
 
 type Props = {
   car: Car;
@@ -15,6 +17,7 @@ type Props = {
 };
 
 const CarCard = ({ car, className, hasActions = false }: Props) => {
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.CAR_BODY, car.id],
     queryFn: () => {
@@ -37,6 +40,9 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
           queryClient.invalidateQueries({
             queryKey: [QUERY_KEYS.MY_CARS],
           });
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.CARS],
+          });
         },
       }
     );
@@ -46,6 +52,14 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
       success: "Car deleted successfully",
       error: "Error, something went wrong",
     });
+  };
+
+  const handleEdit = () => {
+    setEditModalOpen(true);
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    setEditModalOpen(open);
   };
   return (
     <div
@@ -78,7 +92,11 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
       <div className="flex items-end ">
         {hasActions ? (
           <div className="flex flex-col gap-2">
-            <Button variant="outline" className="w-[200px]">
+            <Button
+              variant="outline"
+              className="w-[200px]"
+              onClick={handleEdit}
+            >
               Edit
             </Button>
             <Button
@@ -93,6 +111,11 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
           <Button className="w-[200px]">Pozovi</Button>
         )}
       </div>
+      <EditCarModal
+        car={car}
+        open={editModalOpen}
+        onOpenChange={handleOpenChange}
+      />
     </div>
   );
 };

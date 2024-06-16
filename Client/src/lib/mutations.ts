@@ -36,7 +36,7 @@ export const updateCar = async ({ car }: { car: Car }) => {
      const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
 
     const res = await api({
-        endpoint: `Car`, config: {
+        endpoint: `Car/${car.id}`, config: {
             method: 'PUT',
             data: car,
             headers: {
