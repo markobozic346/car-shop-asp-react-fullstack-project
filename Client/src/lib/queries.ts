@@ -1,7 +1,22 @@
 import { api } from "@/services/api"
-import { Car, CarBody } from "./types";
+import { Car, CarBody, User } from "./types";
 import { TOKEN_KEY } from "./constants";
 
+// ADMIN QUERIS
+
+export const getAllUsers = async (): Promise<User[]> => {
+
+     const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
+    const res = await api({
+        endpoint: 'Admin/users',
+        config: {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        }
+    })
+    return res.data
+}
 
 // PUBLIC QUERIES
 

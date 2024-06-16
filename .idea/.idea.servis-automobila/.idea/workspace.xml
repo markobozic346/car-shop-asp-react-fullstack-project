@@ -9,12 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Add logic for deleting cars">
+    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Add updating and creating cars from client side">
+      <change afterPath="$PROJECT_DIR$/Controllers/AdminController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/AdminController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/components/cars/CarCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/cars/CarCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/lib/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/mutations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/CarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CarController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/CarService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/CarService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/AdminPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/AdminPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +129,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718394376219</updated>
-      <workItem from="1718394378772" duration="43200000" />
+      <workItem from="1718394378772" duration="48490000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project &amp; setup db and auth">
       <option name="closed" value="true" />
@@ -192,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718555466964</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add updating and creating cars from client side">
+      <option name="closed" value="true" />
+      <created>1718560532689</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718560532689</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +232,7 @@
     <MESSAGE value="Wip: Add frontend components" />
     <MESSAGE value="Add Migrations" />
     <MESSAGE value="Add logic for deleting cars" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logic for deleting cars" />
+    <MESSAGE value="Add updating and creating cars from client side" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add updating and creating cars from client side" />
   </component>
 </project>
