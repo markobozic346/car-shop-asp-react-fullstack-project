@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { MUTATION_KEYS } from "@/lib/constants";
 import { createCar } from "@/lib/mutations";
 import { useMutation } from "@tanstack/react-query";
+import { PlusIcon } from "lucide-react";
 
 const CreateCar = () => {
   const { mutate, isPending, isError } = useMutation({
@@ -28,7 +30,10 @@ const CreateCar = () => {
   }
   return (
     <div>
-      <button onClick={handleCreate}>Create</button>
+      <Button className="flex gap-2" onClick={handleCreate}>
+        Add new car
+        <PlusIcon />
+      </Button>
     </div>
   );
 };

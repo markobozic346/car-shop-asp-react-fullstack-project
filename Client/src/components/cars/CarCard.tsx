@@ -1,22 +1,52 @@
-import { QUERY_KEYS } from "@/lib/constants";
+import { MUTATION_KEYS, QUERY_KEYS } from "@/lib/constants";
 import { getCarBodyType } from "@/lib/queries";
 import { Car } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
+import { deleteCar } from "@/lib/mutations";
+import { toast } from "sonner";
+import { queryClient } from "@/routes/__root";
 
 type Props = {
   car: Car;
   className?: string;
+  hasActions?: boolean;
 };
 
-const CarCard = ({ car, className }: Props) => {
+const CarCard = ({ car, className, hasActions = false }: Props) => {
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.CAR_BODY, car.id],
     queryFn: () => {
       return getCarBodyType({ carBodyId: car.carBodyId });
     },
   });
+
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteCar,
+    mutationKey: [MUTATION_KEYS.DELETE_CAR],
+  });
+
+  const handleDelete = () => {
+    const promise = mutateAsync(
+      {
+        carId: car.id,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.MY_CARS],
+          });
+        },
+      }
+    );
+
+    toast.promise(promise, {
+      loading: "Deleting car...",
+      success: "Car deleted successfully",
+      error: "Error, something went wrong",
+    });
+  };
   return (
     <div
       className={cn(
@@ -46,7 +76,22 @@ const CarCard = ({ car, className }: Props) => {
         )}
       </div>
       <div className="flex items-end ">
-        <Button className="w-[200px]">Pozovi</Button>
+        {hasActions ? (
+          <div className="flex flex-col gap-2">
+            <Button variant="outline" className="w-[200px]">
+              Edit
+            </Button>
+            <Button
+              variant="destructive"
+              className="w-[200px]"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+          </div>
+        ) : (
+          <Button className="w-[200px]">Pozovi</Button>
+        )}
       </div>
     </div>
   );

@@ -11,5 +11,7 @@ export const QUERY_KEYS = {
 }
 
 export const MUTATION_KEYS = {
-    CREATE_CAR: 'create_car'
+    CREATE_CAR: 'create_car',
+    DELETE_CAR: 'delete_car',
+    UPDATE_CAR: 'update_car',
 }
