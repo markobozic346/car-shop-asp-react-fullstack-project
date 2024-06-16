@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CarService>();
 builder.Services.AddScoped<CarBodyService>();
+builder.Services.AddScoped<AdminService>();
 
 // Configure JWT authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
