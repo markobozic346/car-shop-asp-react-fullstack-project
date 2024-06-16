@@ -1,22 +1,22 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Car, CircleUser, Menu, Package2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import useAuth from "@/hooks/useAuth";
 import { Toaster } from "sonner";
 import { useState } from "react";
-import { IoMoon } from "react-icons/io5";
 import { IoSunny } from "react-icons/io5";
+import { IoMoon } from "react-icons/io5";
+import { Car, CircleUser, Menu } from "lucide-react";
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import useAuth from "@/hooks/useAuth";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 export const queryClient = new QueryClient();
 
@@ -80,7 +80,11 @@ const Navigation = () => {
       <Link to="/" className="[&.active]:font-bold">
         Home
       </Link>{" "}
-      {isAuth && <></>}
+      {isAuth && (
+        <>
+          <Link to="/cars">Cars</Link>
+        </>
+      )}
       {user?.role === "admin" && (
         <Link to="/admin" className="[&.active]:font-bold">
           Admin

@@ -1,0 +1,14 @@
+export type Car = {
+    id: number
+    model: string
+    make: string
+    year: number
+    userId: number
+    carBodyId: number
+
+}
+
+export type CarBody = {
+    id: number
+    type: string
+}

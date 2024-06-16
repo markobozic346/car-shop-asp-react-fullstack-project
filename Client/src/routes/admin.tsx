@@ -16,8 +16,7 @@ export const Route = createFileRoute("/admin")({
   },
   component: () => (
     <PageSection>
-      {" "}
-      <AdminPage />{" "}
+      <AdminPage />
     </PageSection>
   ),
 });

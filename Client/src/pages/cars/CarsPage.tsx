@@ -1,7 +1,13 @@
-type Props = {};
+import CreateCar from "./components/CreateCar";
+import MyCarList from "./components/MyCarList";
 
-const CarsPage = (props: Props) => {
-  return <div>CarsPage</div>;
+const CarsPage = () => {
+  return (
+    <div>
+      <CreateCar />
+      <MyCarList />
+    </div>
+  );
 };
 
 export default CarsPage;

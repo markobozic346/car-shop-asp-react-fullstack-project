@@ -1,17 +1,14 @@
 import { cn } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
+import CarsForSale from "./components/CarsForSale";
 
-type Props = {
-  className?: string;
-};
-
-const HomePage = ({ className }: Props) => {
+const HomePage = () => {
   return (
     <div>
       <h1 className={cn("text-3xl font-semibold")}>Home</h1>
       <p className={cn("text-lg text-muted-foreground")}>
-        Welcome to the home page.
+        Welcome to the home page. Check all cars for sale:
       </p>
+      <CarsForSale />
     </div>
   );
 };
