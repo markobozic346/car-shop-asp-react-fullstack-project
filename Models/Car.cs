@@ -25,5 +25,8 @@ public class Car
     [ForeignKey("UserId")]
     public User User { get; set; }
 
-    public ICollection<Service> Services { get; set; } = new List<Service>();
+    public int CarBodyId { get; set; }
+
+    [ForeignKey("CarBodyId")]
+    public CarBody CarBody { get; set; }
 }

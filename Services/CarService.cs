@@ -4,47 +4,80 @@ using servis_automobila.Models;
 
 namespace servis_automobila.Services;
 
-public class CarService
+public class CarCreateDTO
 {
-    private readonly ApplicationDbContext _context;
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    public int CarBodyId { get; set; }
+}
 
-    public CarService(ApplicationDbContext context)
+public class CarService
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    public async Task<List<Car>> GetAllCarsAsync()
-    {
-        return await _context.Cars.Include(c => c.User).Include(c => c.Services).ToListAsync();
-    }
-
-    public async Task<Car?> GetCarByIdAsync(int id)
-    {
-        return await _context.Cars.Include(c => c.User).Include(c => c.Services)
-            .FirstOrDefaultAsync(c => c.Id == id);
-    }
-
-    public async Task<Car> CreateCarAsync(Car car)
-    {
-        _context.Cars.Add(car);
-        await _context.SaveChangesAsync();
-        return car;
-    }
-
-    public async Task<Car> UpdateCarAsync(Car car)
-    {
-        _context.Entry(car).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return car;
-    }
-
-    public async Task DeleteCarAsync(int id)
-    {
-        var car = await _context.Cars.FindAsync(id);
-        if (car != null)
+        public CarService(ApplicationDbContext context)
         {
-            _context.Cars.Remove(car);
+            _context = context;
+        }
+
+        public async Task<List<Car>> GetAllUserCarsAsync(int userId)
+        {
+            return await _context.Cars
+                .Where(c => c.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Car>> GetAllCarsAsync()
+        {
+            return await _context.Cars
+                .Include(c => c.User) // Include User if you need user information in the car listing
+                .ToListAsync();
+        }
+
+        public async Task<Car?> GetCarByIdAsync(int id, int userId)
+        {
+            return await _context.Cars
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+        }
+
+        public async Task<Car> CreateCarAsync(CarCreateDTO carCreateDTO, int userId)
+        {
+            var car = new Car
+            {
+                Make = carCreateDTO.Make,
+                Model = carCreateDTO.Model,
+                Year = carCreateDTO.Year,
+                CarBodyId = carCreateDTO.CarBodyId,
+                UserId = userId // Set the user ID for the new car
+            };
+
+            _context.Cars.Add(car);
             await _context.SaveChangesAsync();
+            return car;
+        }
+
+        public async Task UpdateCarAsync(Car car, int userId)
+        {
+            var existingCar = await _context.Cars
+                .FirstOrDefaultAsync(c => c.Id == car.Id && c.UserId == userId);
+
+            if (existingCar != null)
+            {
+                _context.Entry(existingCar).CurrentValues.SetValues(car);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteCarAsync(int id, int userId)
+        {
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+
+            if (car != null)
+            {
+                _context.Cars.Remove(car);
+                await _context.SaveChangesAsync();
+            }
         }
     }
-}

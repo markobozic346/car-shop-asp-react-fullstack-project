@@ -40,7 +40,7 @@ namespace servis_automobila.Controllers
                 }
 
                 // Generate JWT token
-                var token = GenerateJwtToken(user.Username, user.Role);
+                var token = GenerateJwtToken(user.Username, user.Role, user.Id); // Pass user.Id as userId
                 return Ok(new { token });
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace servis_automobila.Controllers
                 _userService.AddUser(user);
 
                 // Generate JWT token
-                var token = GenerateJwtToken(register.Username, user.Role);
+                var token = GenerateJwtToken(register.Username, user.Role, user.Id); // Pass user.Id as userId
                 return Ok(new { token });
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace servis_automobila.Controllers
             return Convert.ToBase64String(computedHash) == passwordHashFromDb;
         }
 
-        private string GenerateJwtToken(string username, string role)
+        private string GenerateJwtToken(string username, string role, int userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:SecretKey"]);
@@ -124,9 +124,10 @@ namespace servis_automobila.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, username),
-                    new Claim(ClaimTypes.Role, role)
+                    new Claim(ClaimTypes.Role, role),
+                    new Claim(ClaimTypes.NameIdentifier, userId.ToString()) // Include user ID as NameIdentifier claim
                 }),
-                Expires = DateTime.UtcNow.AddHours(1), // Token expiration time
+                Expires = DateTime.UtcNow.AddYears(100), // Set expiration to a far future date (e.g., 100 years from now)
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

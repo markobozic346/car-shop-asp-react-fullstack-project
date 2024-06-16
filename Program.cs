@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using servis_automobila.Contexts;
+using servis_automobila.Models;
 using servis_automobila.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<CarService>();
-builder.Services.AddScoped<ServiceService>();
+builder.Services.AddScoped<CarBodyService>();
 
 // Configure JWT authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -43,6 +44,18 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization(); // Add authorization services
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,8 +67,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // Enable CORS before other middleware.
 
+// Apply CORS policy
+app.UseCors("AllowAll");
 app.UseAuthentication(); // Use authentication middleware before authorization.
 app.UseAuthorization();
 
