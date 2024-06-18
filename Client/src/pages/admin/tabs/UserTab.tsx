@@ -98,7 +98,6 @@ const UserTab = () => {
                   <div>You</div>
                 ) : (
                   <>
-                    <Button variant="outline">Edit</Button>
                     <Button
                       variant="destructive"
                       onClick={() => {

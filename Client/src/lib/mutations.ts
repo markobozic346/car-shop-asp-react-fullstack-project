@@ -1,6 +1,6 @@
 import { api } from "@/services/api";
 import { TOKEN_KEY } from "./constants";
-import { Car, User } from "./types";
+import { Car } from "./types";
 
 export const createCar = async ({car}: {car: Omit<Car, 'id' | 'userId'>}): Promise<Car[]> => {
 
@@ -63,13 +63,27 @@ export const deleteUserAdmin = async ({ userId }: { userId: number }) => {
     return res.data
 }
 
-export const updateUserAdmin = async ({ user }: { user: User }) => {
+export const deleteCarAdmin = async ({ carId }: { carId: number }) => {
+    const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
+
+    const res = await api({
+        endpoint: `Admin/cars/${carId}`, config: {
+            method: 'DELETE',
+            headers: {
+            Authorization: `Bearer ${jwt}`
+            },
+    } })
+    
+    return res.data
+}
+
+export const updateCarAdmin = async ({ car }: { car: Car }) => {
      const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
 
     const res = await api({
-        endpoint: `Admin/users/${user.id}`, config: {
+        endpoint: `Admin/cars/${car.id}`, config: {
             method: 'PUT',
-            data: user,
+            data: car,
             headers: {
             Authorization: `Bearer ${jwt}`
             },

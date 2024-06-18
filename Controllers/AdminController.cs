@@ -12,30 +12,24 @@ public class AdminController : ControllerBase
 {
     private readonly AdminService _adminService;
 
+    public class UpdateCarViewModel
+    {
+        public int Id { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        public int UserId { get; set; }
+        public int CarBodyId { get; set; }
+    }
     public AdminController(AdminService adminService)
     {
         _adminService = adminService;
     }
-
-    [HttpGet("users")]
+ [HttpGet("users")]
     public async Task<ActionResult<List<User>>> GetAllUsers()
     {
         var users = await _adminService.GetAllUsersAsync();
         return Ok(users);
-    }
-
-    [HttpGet("cars")]
-    public async Task<ActionResult<List<Car>>> GetAllCars()
-    {
-        var cars = await _adminService.GetAllCarsAsync();
-        return Ok(cars);
-    }
-
-    [HttpGet("carbodies")]
-    public async Task<ActionResult<List<CarBody>>> GetAllCarBodies()
-    {
-        var carBodies = await _adminService.GetAllCarBodiesAsync();
-        return Ok(carBodies);
     }
 
     [HttpPost("users")]
@@ -75,6 +69,15 @@ public class AdminController : ControllerBase
         return NoContent();
     }
 
+    // Cars Endpoints
+
+    [HttpGet("cars")]
+    public async Task<ActionResult<List<Car>>> GetAllCars()
+    {
+        var cars = await _adminService.GetAllCarsAsync();
+        return Ok(cars);
+    }
+
     [HttpPost("cars")]
     public async Task<ActionResult<Car>> CreateCar(Car car)
     {
@@ -94,12 +97,24 @@ public class AdminController : ControllerBase
     }
 
     [HttpPut("cars/{id}")]
-    public async Task<IActionResult> UpdateCar(int id, Car car)
+    public async Task<IActionResult> UpdateCar(int id, UpdateCarViewModel model)
     {
-        if (id != car.Id)
+        if (id != model.Id)
         {
             return BadRequest();
         }
+
+        var car = await _adminService.GetCarByIdAsync(id);
+        if (car == null)
+        {
+            return NotFound();
+        }
+
+        car.Make = model.Make;
+        car.Model = model.Model;
+        car.Year = model.Year;
+        car.UserId = model.UserId;
+        car.CarBodyId = model.CarBodyId;
 
         await _adminService.UpdateCarAsync(car);
         return NoContent();
@@ -110,6 +125,15 @@ public class AdminController : ControllerBase
     {
         await _adminService.DeleteCarAsync(id);
         return NoContent();
+    }
+
+    // Car Bodies Endpoints
+
+    [HttpGet("carbodies")]
+    public async Task<ActionResult<List<CarBody>>> GetAllCarBodies()
+    {
+        var carBodies = await _adminService.GetAllCarBodiesAsync();
+        return Ok(carBodies);
     }
 
     [HttpPost("carbodies")]

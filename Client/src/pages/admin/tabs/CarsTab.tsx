@@ -16,19 +16,29 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { QUERY_KEYS } from "@/lib/constants";
+import { MUTATION_KEYS, QUERY_KEYS } from "@/lib/constants";
 import { getAllCars, getCarBodyType } from "@/lib/queries";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { deleteCarAdmin } from "@/lib/mutations";
+import { toast } from "sonner";
+import { queryClient } from "@/routes/__root";
+import EditCarAdminModal from "@/components/modals/EditCarAdminModal";
 
 const PAGE_SIZE = 10;
 
 const CarsTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isEditOpen, setEditOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [QUERY_KEYS.CARS],
     queryFn: getAllCars,
+  });
+
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteCarAdmin,
+    mutationKey: [MUTATION_KEYS.DELETE_CAR],
   });
 
   if (isError) {
@@ -46,6 +56,34 @@ const CarsTab = () => {
     currentPage * PAGE_SIZE
   );
 
+  const handleDelete = ({ carId }: { carId: number }) => {
+    const promise = mutateAsync(
+      {
+        carId,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.CARS],
+          });
+        },
+      }
+    );
+
+    toast.promise(promise, {
+      loading: "Deleting user car...",
+      error: "Error, something went wrong",
+      success: "Car deleted successfully",
+    });
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    setEditOpen(open);
+  };
+
+  const handleEdit = () => {
+    setEditOpen(true);
+  };
   return (
     <div>
       <Table>
@@ -69,9 +107,23 @@ const CarsTab = () => {
               <TableCell>{car.year}</TableCell>
               <CarBodyCell carBodyId={car.carBodyId} carId={car.id} />
               <TableCell className="font-medium flex gap-2">
-                <Button variant="outline">Edit</Button>
-                <Button variant="destructive">Delete</Button>
+                <Button variant="outline" onClick={handleEdit}>
+                  Edit
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    handleDelete({ carId: car.id });
+                  }}
+                >
+                  Delete
+                </Button>
               </TableCell>
+              <EditCarAdminModal
+                car={car}
+                open={isEditOpen}
+                onOpenChange={handleOpenChange}
+              />
             </TableRow>
           ))}
         </TableBody>

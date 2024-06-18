@@ -9,15 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Add updating and creating cars from client side">
-      <change afterPath="$PROJECT_DIR$/Controllers/AdminController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/AdminController.cs" afterDir="false" />
+    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Wip: Add admin client">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/lib/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/AdminPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/AdminPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/mutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/UserTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/UserTab.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/AdminService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,7 @@
     <setting file="mock://D:/faks/csharp/servis-automobila/Controllers/CarController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Migrations/ApplicationDbContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Models/Car.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/faks/csharp/servis-automobila/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Services/CarService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -129,7 +128,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718394376219</updated>
-      <workItem from="1718394378772" duration="48490000" />
+      <workItem from="1718394378772" duration="51766000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project &amp; setup db and auth">
       <option name="closed" value="true" />
@@ -203,7 +202,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718560532689</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add Admin controller and admin services">
+      <option name="closed" value="true" />
+      <created>1718570699238</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718570699238</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Wip: Add admin client">
+      <option name="closed" value="true" />
+      <created>1718570726717</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1718570726717</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +248,8 @@
     <MESSAGE value="Add Migrations" />
     <MESSAGE value="Add logic for deleting cars" />
     <MESSAGE value="Add updating and creating cars from client side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add updating and creating cars from client side" />
+    <MESSAGE value="Add Admin controller and admin services" />
+    <MESSAGE value="Wip: Add admin client" />
+    <option name="LAST_COMMIT_MESSAGE" value="Wip: Add admin client" />
   </component>
 </project>
