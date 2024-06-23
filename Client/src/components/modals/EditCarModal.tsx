@@ -56,6 +56,10 @@ const EditCarModal = ({ car, open, onOpenChange }: Props) => {
   const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedCar((prev) => ({ ...prev, model: e.target.value }));
   };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedCar((prev) => ({ ...prev, price: parseInt(e.target.value) }));
+  };
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditedCar((prev) => ({ ...prev, year: parseInt(e.target.value) }));
   };
@@ -128,6 +132,16 @@ const EditCarModal = ({ car, open, onOpenChange }: Props) => {
               type="text"
               onChange={handleModelChange}
               value={editedCar.model}
+            />
+          </Label>
+          <Label>
+            Price
+            <Input
+              type="number"
+              min={0}
+              max={9999999}
+              onChange={handlePriceChange}
+              value={editedCar.price}
             />
           </Label>
           <Label>

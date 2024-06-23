@@ -86,6 +86,7 @@ const CarsTab = () => {
             <TableHead className="w-[100px]">ID</TableHead>
             <TableHead className="w-[100px]">Make</TableHead>
             <TableHead>Model</TableHead>
+            <TableHead className="w-[100px]">Price</TableHead>
             <TableHead>Year</TableHead>
             <TableHead className="text-right">Car Body</TableHead>
             <TableHead className="w-[100px]">Actions</TableHead>
@@ -97,6 +98,7 @@ const CarsTab = () => {
               <TableCell className="font-medium">{car.id}</TableCell>
               <TableCell className="font-medium">{car.make}</TableCell>
               <TableCell>{car.model}</TableCell>
+              <TableCell className="font-medium">{car.price}</TableCell>
               <TableCell>{car.year}</TableCell>
               <CarBodyCell carBodyId={car.carBodyId} carId={car.id} />
               <TableCell className="font-medium flex gap-2">

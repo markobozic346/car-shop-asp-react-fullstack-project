@@ -4,23 +4,6 @@ using servis_automobila.Models;
 
 namespace servis_automobila.Services;
 
-public class CarCreateDTO
-{
-    public string Make { get; set; }
-    public string Model { get; set; }
-    public int Year { get; set; }
-    public int CarBodyId { get; set; }
-}
-
-public class CarUpdateDTO
-{
-    public int Id { get; set; }
-    public string Make { get; set; }
-    public string Model { get; set; }
-    public int Year { get; set; }
-    public int CarBodyId { get; set; }
-}
-
 public class CarService
 {
     private readonly ApplicationDbContext _context;
@@ -58,7 +41,8 @@ public class CarService
             Model = carCreateDTO.Model,
             Year = carCreateDTO.Year,
             CarBodyId = carCreateDTO.CarBodyId,
-            UserId = userId // Set the user ID for the new car
+            UserId = userId, // Set the user ID for the new car
+            Price = carCreateDTO.Price // Set the price
         };
 
         _context.Cars.Add(car);
@@ -77,6 +61,7 @@ public class CarService
             existingCar.Model = car.Model;
             existingCar.Year = car.Year;
             existingCar.CarBodyId = car.CarBodyId;
+            existingCar.Price = car.Price; // Update the price
 
             await _context.SaveChangesAsync();
         }

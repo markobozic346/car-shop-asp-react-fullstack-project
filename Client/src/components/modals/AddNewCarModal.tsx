@@ -34,6 +34,7 @@ const AddNewCarModal = ({ open, onOpenChange }: Props) => {
     model: "",
     make: "",
     year: 0,
+    price: 0,
     carBodyId: 0,
   });
 
@@ -58,6 +59,11 @@ const AddNewCarModal = ({ open, onOpenChange }: Props) => {
   const handleModelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewCar((prev) => ({ ...prev, model: e.target.value }));
   };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewCar((prev) => ({ ...prev, price: parseInt(e.target.value) }));
+  };
+
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewCar((prev) => ({ ...prev, year: parseInt(e.target.value) }));
   };
@@ -91,8 +97,8 @@ const AddNewCarModal = ({ open, onOpenChange }: Props) => {
     );
 
     toast.promise(promise, {
-      loading: "Updating car...",
-      success: "Car updated successfully",
+      loading: "Creating car...",
+      success: "Car created successfully",
       error: "Error, something went wrong",
     });
   };
@@ -122,6 +128,16 @@ const AddNewCarModal = ({ open, onOpenChange }: Props) => {
             />
           </Label>
           <Label>
+            Price
+            <Input
+              type="number"
+              min={0}
+              max={9999999}
+              onChange={handlePriceChange}
+              value={newCar.price}
+            />
+          </Label>
+          <Label>
             Year
             <Input
               type="number"
@@ -132,7 +148,7 @@ const AddNewCarModal = ({ open, onOpenChange }: Props) => {
             />
           </Label>
           <Label>
-            Model
+            Car Body Type
             <Select
               onValueChange={handleEditCarBody}
               disabled={isLoadingCarBodies}

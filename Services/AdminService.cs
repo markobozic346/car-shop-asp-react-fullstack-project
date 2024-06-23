@@ -15,7 +15,6 @@ public class AdminService
     }
 
     // Users CRUD operations
-
     public async Task<List<User>> GetAllUsersAsync()
     {
         return await _context.Users.ToListAsync();
@@ -50,7 +49,6 @@ public class AdminService
     }
 
     // Cars CRUD operations
-
     public async Task<List<Car>> GetAllCarsAsync()
     {
         return await _context.Cars.ToListAsync();
@@ -85,7 +83,6 @@ public class AdminService
     }
 
     // Car Bodies CRUD operations
-
     public async Task<List<CarBody>> GetAllCarBodiesAsync()
     {
         return await _context.CarBodies.ToListAsync();

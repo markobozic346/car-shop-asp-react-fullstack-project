@@ -42,6 +42,9 @@ namespace servis_automobila.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
