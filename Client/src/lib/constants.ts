@@ -17,4 +17,5 @@ export const MUTATION_KEYS = {
     UPDATE_CAR: 'update_car',
     DELETE_USER: 'delete_user',
     UPDATE_USER: 'update_user',
+    UPDATE_CAR_BODY: 'update_car_body',
 }

@@ -82,7 +82,9 @@ const Navigation = () => {
       </Link>{" "}
       {isAuth && (
         <>
-          <Link to="/cars">Cars</Link>
+          <Link to="/cars" className="[&.active]:font-bold">
+            Cars
+          </Link>
         </>
       )}
       {user?.role === "admin" && (

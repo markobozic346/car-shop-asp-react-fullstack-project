@@ -19,6 +19,9 @@ import {
 import { getAllCarBodyTypes } from "@/lib/queries";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import EditCarBodyTypeAdminModal from "@/components/modals/EditCarBodyTypeAdminModal";
+import { CarBody } from "@/lib/types";
+import { QUERY_KEYS } from "@/lib/constants";
 
 const PAGE_SIZE = 10;
 
@@ -27,7 +30,7 @@ const CarBodiesTab = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryFn: getAllCarBodyTypes,
-    queryKey: [],
+    queryKey: [QUERY_KEYS.CAR_BODIES],
   });
 
   if (isError) {
@@ -63,8 +66,10 @@ const CarBodiesTab = () => {
               <TableCell className="font-medium">{carBody.id}</TableCell>
               <TableCell className="font-medium">{carBody.type}</TableCell>
               <TableCell className="font-medium flex gap-2">
-                <Button variant="outline">Edit</Button>
-                <Button variant="destructive">Delete</Button>
+                <EditCarBodyAdmin carBody={carBody} />
+                <Button variant="destructive" disabled>
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}
@@ -103,6 +108,32 @@ const CarBodiesTab = () => {
         </PaginationContent>
       </Pagination>
     </div>
+  );
+};
+
+const EditCarBodyAdmin = ({ carBody }: { carBody: CarBody }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleEditCarBodyType = () => {
+    setOpenModal(true);
+  };
+
+  const handleOpenModalChange = (open: boolean) => {
+    setOpenModal(open);
+  };
+
+  return (
+    <>
+      <Button variant="outline" onClick={handleEditCarBodyType}>
+        Edit
+      </Button>
+      <EditCarBodyTypeAdminModal
+        key={carBody.id}
+        bodyType={carBody}
+        open={openModal}
+        onOpenChange={handleOpenModalChange}
+      />
+    </>
   );
 };
 

@@ -9,13 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Wip: Add admin client">
+    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Add admin cars delete &amp; update">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/lib/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/mutations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarBodiesTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarBodiesTab.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/UserTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/UserTab.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/AdminService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/routes/__root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/routes/__root.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +31,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9b415e10f5ba4a949da6625f698e9c5d26a7c0/84/dd9b9167/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c9def41c6ba94ffebf13904603f32384188a0/0f/2edef918/ClaimTypes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/faks/csharp/servis-automobila/Controllers/AdminController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Controllers/AuthController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Controllers/CarController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/faks/csharp/servis-automobila/Migrations/ApplicationDbContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
@@ -128,7 +129,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718394376219</updated>
-      <workItem from="1718394378772" duration="51766000" />
+      <workItem from="1718394378772" duration="54284000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project &amp; setup db and auth">
       <option name="closed" value="true" />
@@ -218,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718570726717</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add admin cars delete &amp; update">
+      <option name="closed" value="true" />
+      <created>1718740622050</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1718740622050</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +259,7 @@
     <MESSAGE value="Add updating and creating cars from client side" />
     <MESSAGE value="Add Admin controller and admin services" />
     <MESSAGE value="Wip: Add admin client" />
-    <option name="LAST_COMMIT_MESSAGE" value="Wip: Add admin client" />
+    <MESSAGE value="Add admin cars delete &amp; update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add admin cars delete &amp; update" />
   </component>
 </project>
