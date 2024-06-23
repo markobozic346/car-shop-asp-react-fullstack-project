@@ -22,10 +22,12 @@ import { Button } from "@/components/ui/button";
 import EditCarBodyTypeAdminModal from "@/components/modals/EditCarBodyTypeAdminModal";
 import { CarBody } from "@/lib/types";
 import { QUERY_KEYS } from "@/lib/constants";
+import { Route } from "@/routes/admin";
 
 const PAGE_SIZE = 10;
 
 const CarBodiesTab = () => {
+  const { search } = Route.useSearch();
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError } = useQuery({
@@ -41,72 +43,92 @@ const CarBodiesTab = () => {
     return <div>Loading...</div>;
   }
 
-  const totalCarBodies = data?.length || 0;
+  // Apply client-side search filtering
+  const filteredCarBodies = data?.filter((carBody) =>
+    carBody.type.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalCarBodies = filteredCarBodies?.length || 0;
   const totalPages = Math.ceil(totalCarBodies / PAGE_SIZE);
 
-  const currentCarBodies = data?.slice(
+  const currentCarBodies = filteredCarBodies?.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
 
+  const handlePaginationClick = (pageIndex: number) => {
+    setCurrentPage(pageIndex);
+  };
+
   return (
     <div>
-      <Table>
-        <TableCaption>All Car Bodies</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">ID</TableHead>
-            <TableHead className="w-[100px]">Type</TableHead>
-            <TableHead className="w-[100px]">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {currentCarBodies?.map((carBody) => (
-            <TableRow key={carBody.id}>
-              <TableCell className="font-medium">{carBody.id}</TableCell>
-              <TableCell className="font-medium">{carBody.type}</TableCell>
-              <TableCell className="font-medium flex gap-2">
-                <EditCarBodyAdmin carBody={carBody} />
-                <Button variant="destructive" disabled>
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {currentCarBodies?.length === 0 ? (
+        <div className="flex justify-center mt-8 text-lg font-medium">
+          No results found.
+        </div>
+      ) : (
+        <>
+          <Table>
+            <TableCaption>All Car Bodies</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">ID</TableHead>
+                <TableHead className="w-[100px]">Type</TableHead>
+                <TableHead className="w-[100px]">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {currentCarBodies?.map((carBody) => (
+                <TableRow key={carBody.id}>
+                  <TableCell className="font-medium">{carBody.id}</TableCell>
+                  <TableCell className="font-medium">{carBody.type}</TableCell>
+                  <TableCell className="font-medium flex gap-2">
+                    <EditCarBodyAdmin carBody={carBody} />
+                    <Button variant="destructive" disabled>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
 
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              //   disabled={currentPage === 1}
-            />
-          </PaginationItem>
-          {[...Array(totalPages)].map((_, index) => (
-            <PaginationItem key={index}>
-              <PaginationLink
-                href="#"
-                onClick={() => setCurrentPage(index + 1)}
-                // active={index + 1 === currentPage}
-              >
-                {index + 1}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              //   disabled={currentPage === totalPages}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+          {totalPages > 1 && (
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={() =>
+                      handlePaginationClick(Math.max(currentPage - 1, 1))
+                    }
+                  />
+                </PaginationItem>
+                {[...Array(totalPages)].map((_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      href="#"
+                      onClick={() => handlePaginationClick(index + 1)}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={() =>
+                      handlePaginationClick(
+                        Math.min(currentPage + 1, totalPages)
+                      )
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
+        </>
+      )}
     </div>
   );
 };

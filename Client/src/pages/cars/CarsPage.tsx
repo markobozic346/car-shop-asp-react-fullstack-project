@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import CreateCar from "./components/CreateCar";
 import MyCarList from "./components/MyCarList";
+import SearchCars from "./components/SearchCars";
 
 const CarsPage = () => {
   return (
@@ -9,7 +10,8 @@ const CarsPage = () => {
       <p className={cn("text-lg text-muted-foreground")}>
         Manage your own cars here.
       </p>
-      <div className="flex w-full justify-end items-end">
+      <div className="flex w-full flex-col gap-4 md:flex-row justify-between">
+        <SearchCars />
         <CreateCar />
       </div>
       <MyCarList />

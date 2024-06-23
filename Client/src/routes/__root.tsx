@@ -83,20 +83,31 @@ const Navigation = () => {
         search={{
           search: "",
           page: "",
-          filter: "",
         }}
       >
         Home
       </Link>{" "}
       {isAuth && (
         <>
-          <Link to="/cars" className="[&.active]:font-bold">
+          <Link
+            to="/cars"
+            className="[&.active]:font-bold"
+            search={{
+              search: "",
+            }}
+          >
             Cars
           </Link>
         </>
       )}
       {user?.role === "admin" && (
-        <Link to="/admin" className="[&.active]:font-bold">
+        <Link
+          to="/admin"
+          className="[&.active]:font-bold"
+          search={{
+            search: "",
+          }}
+        >
           Admin
         </Link>
       )}

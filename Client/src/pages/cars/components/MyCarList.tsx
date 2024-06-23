@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-
 import { getMyCars } from "@/lib/queries";
 import { QUERY_KEYS } from "@/lib/constants";
 import CarCard from "@/components/cars/CarCard";
@@ -12,13 +11,19 @@ import {
   PaginationLink,
   PaginationNext,
 } from "@/components/ui/pagination";
+import { Route } from "@/routes/cars";
 
 const PAGE_SIZE = 10;
 
 const MyCarList = () => {
+  const { search } = Route.useSearch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, isError } = useQuery({
+  const {
+    data: cars,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [QUERY_KEYS.MY_CARS],
     queryFn: getMyCars,
   });
@@ -31,51 +36,56 @@ const MyCarList = () => {
     return <div>Loading...</div>;
   }
 
-  const totalCars = data?.length || 0;
+  const filteredCars = cars?.filter((car) =>
+    car.make.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalCars = filteredCars?.length || 0;
   const totalPages = Math.ceil(totalCars / PAGE_SIZE);
 
-  const currentCars = data?.slice(
+  const currentCars = filteredCars?.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
 
+  const noCars = currentCars?.length === 0;
   return (
     <div className="flex flex-col gap-4 mt-10">
-      {currentCars?.map((car) => {
-        return <CarCard hasActions={true} key={car.id} car={car} />;
-      })}
+      {currentCars?.map((car) => (
+        <CarCard hasActions={true} key={car.id} car={car} />
+      ))}
 
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href="#"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              //   disabled={currentPage === 1}
-            />
-          </PaginationItem>
-          {[...Array(totalPages)].map((_, index) => (
-            <PaginationItem key={index}>
-              <PaginationLink
+      {noCars && <p className="text-center ">No cars found</p>}
+      {!noCars && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
                 href="#"
-                onClick={() => setCurrentPage(index + 1)}
-                // active={index + 1 === currentPage}
-              >
-                {index + 1}
-              </PaginationLink>
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              />
             </PaginationItem>
-          ))}
-          <PaginationItem>
-            <PaginationNext
-              href="#"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              //   disabled={currentPage === totalPages}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {[...Array(totalPages)].map((_, index) => (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  href="#"
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

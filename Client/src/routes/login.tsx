@@ -11,6 +11,10 @@ export const Route = createFileRoute("/login")({
     if (jwt) {
       throw redirect({
         to: "/",
+        search: {
+          search: "",
+          page: "1",
+        },
       });
     }
   },
