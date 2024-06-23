@@ -77,7 +77,15 @@ const Navigation = () => {
         <Car className="h-6 w-6" />
         <span className="sr-only">Car Service</span>
       </Link>
-      <Link to="/" className="[&.active]:font-bold">
+      <Link
+        to="/"
+        className="[&.active]:font-bold"
+        search={{
+          search: "",
+          page: "",
+          filter: "",
+        }}
+      >
         Home
       </Link>{" "}
       {isAuth && (

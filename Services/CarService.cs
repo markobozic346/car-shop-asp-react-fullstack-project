@@ -27,7 +27,7 @@ public class CarService
             .ToListAsync();
     }
 
-    public async Task<Car?> GetCarByIdAsync(int id, int userId)
+    public async Task<Car> GetCarByIdAsync(int id, int userId)
     {
         return await _context.Cars
             .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
@@ -77,5 +77,25 @@ public class CarService
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public async Task<List<Car>> GetPaginatedCarsAsync(int page, int pageSize, string search = null)
+    {
+        IQueryable<Car> query = _context.Cars;
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            query = query.Where(c =>
+                    c.Make.Contains(search) ||
+                    c.Model.Contains(search) ||
+                    c.Year.ToString().Contains(search) ||
+                    c.Price.ToString().Contains(search)
+            );
+        }
+
+        return await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 }

@@ -3,7 +3,6 @@ import { Car, CarBody, User } from "./types";
 import { TOKEN_KEY } from "./constants";
 
 // ADMIN QUERIS
-
 export const getAllUsers = async (): Promise<User[]> => {
 
      const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
@@ -19,6 +18,20 @@ export const getAllUsers = async (): Promise<User[]> => {
 }
 
 // PUBLIC QUERIES
+
+export const getAllCarsPaginated = async ({page, pageSize, search}: {page: number, pageSize: number, search: string}): Promise<Car[]> => {
+    const res = await api({
+        endpoint: 'Car/paginated',
+        config: {
+            params: {
+                page,
+                pageSize,
+                search,
+          }
+      }
+    })
+    return res.data
+}
 
 export const getAllCars = async (): Promise<Car[]> => {
     

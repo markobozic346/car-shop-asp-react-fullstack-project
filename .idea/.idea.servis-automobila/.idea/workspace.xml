@@ -9,19 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Fix edit car admin modal">
+    <list default="true" id="d3b019a0-6c84-4496-89c5-0addc892a2ca" name="Changes" comment="Add price to the car on the Client logic">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.servis-automobila/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/components/cars/CarCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/cars/CarCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/components/modals/AddNewCarModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/modals/AddNewCarModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/components/modals/EditCarAdminModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/modals/EditCarAdminModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/components/modals/EditCarModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/components/modals/EditCarModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/admin/tabs/CarsTab.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AdminController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/lib/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/lib/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/home/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/home/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/pages/home/components/CarsForSale.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/pages/home/components/CarsForSale.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/routes/__root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/routes/__root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/routes/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/CarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CarController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Car.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Car.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/AdminService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/AdminService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/CarService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/CarService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +131,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718394376219</updated>
-      <workItem from="1718394378772" duration="61528000" />
+      <workItem from="1718394378772" duration="65413000" />
     </task>
     <task id="LOCAL-00001" summary="Initialize project &amp; setup db and auth">
       <option name="closed" value="true" />
@@ -250,7 +245,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719139239040</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add migrations for car price">
+      <option name="closed" value="true" />
+      <created>1719160269589</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1719160269589</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add price to the car on the Client logic">
+      <option name="closed" value="true" />
+      <created>1719160295578</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1719160295578</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +296,8 @@
     <MESSAGE value="Add admin cars delete &amp; update" />
     <MESSAGE value="Add car bodies edit modal" />
     <MESSAGE value="Fix edit car admin modal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix edit car admin modal" />
+    <MESSAGE value="Add migrations for car price" />
+    <MESSAGE value="Add price to the car on the Client logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add price to the car on the Client logic" />
   </component>
 </project>
