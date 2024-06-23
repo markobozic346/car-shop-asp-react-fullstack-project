@@ -24,12 +24,12 @@ import { deleteCarAdmin } from "@/lib/mutations";
 import { toast } from "sonner";
 import { queryClient } from "@/routes/__root";
 import EditCarAdminModal from "@/components/modals/EditCarAdminModal";
+import { Car } from "@/lib/types";
 
 const PAGE_SIZE = 10;
 
 const CarsTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isEditOpen, setEditOpen] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [QUERY_KEYS.CARS],
@@ -77,13 +77,6 @@ const CarsTab = () => {
     });
   };
 
-  const handleOpenChange = (open: boolean) => {
-    setEditOpen(open);
-  };
-
-  const handleEdit = () => {
-    setEditOpen(true);
-  };
   return (
     <div>
       <Table>
@@ -107,9 +100,7 @@ const CarsTab = () => {
               <TableCell>{car.year}</TableCell>
               <CarBodyCell carBodyId={car.carBodyId} carId={car.id} />
               <TableCell className="font-medium flex gap-2">
-                <Button variant="outline" onClick={handleEdit}>
-                  Edit
-                </Button>
+                <EditCarAdmin car={car} />
                 <Button
                   variant="destructive"
                   onClick={() => {
@@ -119,11 +110,6 @@ const CarsTab = () => {
                   Delete
                 </Button>
               </TableCell>
-              <EditCarAdminModal
-                car={car}
-                open={isEditOpen}
-                onOpenChange={handleOpenChange}
-              />
             </TableRow>
           ))}
         </TableBody>
@@ -187,4 +173,27 @@ const CarBodyCell = ({
   return <TableCell className="text-right">{data?.type}</TableCell>;
 };
 
+const EditCarAdmin = ({ car }: { car: Car }) => {
+  const [isEditOpen, setEditOpen] = useState(false);
+
+  const handleOpenChange = (open: boolean) => {
+    setEditOpen(open);
+  };
+
+  const handleEdit = () => {
+    setEditOpen(true);
+  };
+  return (
+    <>
+      <Button variant="outline" onClick={handleEdit}>
+        Edit
+      </Button>
+      <EditCarAdminModal
+        car={car}
+        open={isEditOpen}
+        onOpenChange={handleOpenChange}
+      />
+    </>
+  );
+};
 export default CarsTab;
