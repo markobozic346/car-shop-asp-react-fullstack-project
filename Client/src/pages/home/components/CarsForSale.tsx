@@ -12,16 +12,17 @@ import {
 import { Route } from "@/routes";
 import { QUERY_KEYS } from "@/lib/constants";
 import CarCard from "@/components/cars/CarCard";
-import { getAllCars, getAllCarsPaginated } from "@/lib/queries";
+import { getAllCars, getAllCarsPaginated, getMyFavorites } from "@/lib/queries";
 import { useEffect } from "react";
+import useAuth from "@/hooks/useAuth";
 
 const PAGE_SIZE = 5;
 
 const CarsForSale = () => {
   const { search, page } = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
+  const { isAuth } = useAuth();
 
-  console.log(search);
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: [QUERY_KEYS.CARS, page],
     queryFn: () => {
@@ -31,6 +32,12 @@ const CarsForSale = () => {
         search,
       });
     },
+  });
+
+  const { data: favorites } = useQuery({
+    queryKey: [QUERY_KEYS.FAVORITES],
+    queryFn: getMyFavorites,
+    enabled: isAuth,
   });
 
   useEffect(() => {
@@ -58,7 +65,12 @@ const CarsForSale = () => {
   return (
     <div className="flex flex-col gap-4 mt-10">
       {currentCars.map((car) => (
-        <CarCard key={car.id} car={car} />
+        <CarCard
+          key={car.id}
+          car={car}
+          hasFavorite={isAuth}
+          isFavorite={Boolean(favorites?.find((f) => f.id === car.id))}
+        />
       ))}
 
       <Pagination>

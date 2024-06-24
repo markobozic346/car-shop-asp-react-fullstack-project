@@ -9,6 +9,7 @@ export const QUERY_KEYS = {
     CAR_BODY: 'car_body',
     CAR_BODIES: 'car_bodies',
     USERS: 'users',
+    FAVORITES: 'favorites',
 }
 
 export const MUTATION_KEYS = {
@@ -18,4 +19,5 @@ export const MUTATION_KEYS = {
     DELETE_USER: 'delete_user',
     UPDATE_USER: 'update_user',
     UPDATE_CAR_BODY: 'update_car_body',
+    TOGGLE_FAVORITE: 'toggle_favorite',
 }

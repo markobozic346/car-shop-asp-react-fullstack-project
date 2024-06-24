@@ -4,19 +4,28 @@ import { Car } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "../ui/button";
-import { deleteCar } from "@/lib/mutations";
+import { deleteCar, toggleFavoriteCar } from "@/lib/mutations";
 import { toast } from "sonner";
 import { queryClient } from "@/routes/__root";
 import { useState } from "react";
 import EditCarModal from "../modals/EditCarModal";
+import { Heart } from "lucide-react";
 
 type Props = {
   car: Car;
   className?: string;
   hasActions?: boolean;
+  hasFavorite?: boolean;
+  isFavorite?: boolean;
 };
 
-const CarCard = ({ car, className, hasActions = false }: Props) => {
+const CarCard = ({
+  car,
+  className,
+  hasActions = false,
+  hasFavorite = false,
+  isFavorite = false,
+}: Props) => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.CAR_BODY, car.id],
@@ -28,6 +37,11 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
   const { mutateAsync } = useMutation({
     mutationFn: deleteCar,
     mutationKey: [MUTATION_KEYS.DELETE_CAR],
+  });
+
+  const { mutateAsync: toggleFavorite } = useMutation({
+    mutationFn: toggleFavoriteCar,
+    mutationKey: [MUTATION_KEYS.TOGGLE_FAVORITE],
   });
 
   const handleDelete = () => {
@@ -61,6 +75,31 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
   const handleOpenChange = (open: boolean) => {
     setEditModalOpen(open);
   };
+
+  const handleToggleFavorite = () => {
+    const promise = toggleFavorite(
+      {
+        car,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.FAVORITES],
+          });
+          queryClient.invalidateQueries({
+            queryKey: [QUERY_KEYS.CARS],
+          });
+        },
+      }
+    );
+
+    toast.promise(promise, {
+      loading: "Toggling favorite...",
+      success: "Favorite toggled successfully",
+      error: "Error, something went wrong",
+    });
+  };
+
   return (
     <div
       className={cn(
@@ -89,9 +128,9 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
           </div>
         )}
       </div>
-      <div className="flex items-end ">
+      <div className="flex items-end justify-center gap-2">
         {hasActions ? (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             <Button
               variant="outline"
               className="w-[200px]"
@@ -109,6 +148,16 @@ const CarCard = ({ car, className, hasActions = false }: Props) => {
           </div>
         ) : (
           <Button className="w-[200px]">Pozovi</Button>
+        )}
+        {hasFavorite && (
+          <>
+            <Heart
+              onClick={handleToggleFavorite}
+              className={cn("size-8", {
+                "fill-red-400 stroke-transparent": isFavorite,
+              })}
+            />
+          </>
         )}
       </div>
       <EditCarModal

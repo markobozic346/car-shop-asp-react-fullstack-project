@@ -18,7 +18,6 @@ export const getAllUsers = async (): Promise<User[]> => {
 }
 
 // PUBLIC QUERIES
-
 export const getAllCarsPaginated = async ({page, pageSize, search}: {page: number, pageSize: number, search: string}): Promise<Car[]> => {
     const res = await api({
         endpoint: 'Car/paginated',
@@ -76,4 +75,20 @@ export const getMyCars = async (): Promise<Car[]> => {
     
     return res.data;
 }
+
+export const getMyFavorites = async (): Promise<Car[]> => {
+
+    const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
+
+    const res = await api({
+        endpoint: "Favorites/my", config: {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        }
+    })
+
+    return res.data;
+}
+
 

@@ -78,6 +78,29 @@ namespace servis_automobila.Migrations
                     b.ToTable("CarBodies");
                 });
 
+            modelBuilder.Entity("servis_automobila.Models.SavedCar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SavedCars");
+                });
+
             modelBuilder.Entity("servis_automobila.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -126,6 +149,35 @@ namespace servis_automobila.Migrations
                     b.Navigation("CarBody");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("servis_automobila.Models.SavedCar", b =>
+                {
+                    b.HasOne("servis_automobila.Models.Car", "Car")
+                        .WithMany("SavedByUsers")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("servis_automobila.Models.User", "User")
+                        .WithMany("SavedCars")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("servis_automobila.Models.Car", b =>
+                {
+                    b.Navigation("SavedByUsers");
+                });
+
+            modelBuilder.Entity("servis_automobila.Models.User", b =>
+                {
+                    b.Navigation("SavedCars");
                 });
 #pragma warning restore 612, 618
         }

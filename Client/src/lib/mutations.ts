@@ -47,6 +47,23 @@ export const updateCar = async ({ car }: { car: Car }) => {
     return res.data;
 }
 
+export const toggleFavoriteCar = async ({ car }: { car: Car }) => {
+    const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
+
+    const res = await api({
+        endpoint: `Favorites/toggle`, config: {
+            method: 'POST',
+            data: {
+                carId: car.id
+            },
+            headers: {
+            Authorization: `Bearer ${jwt}`
+            },
+    } })
+    
+    return res.data;
+
+}
 // ADMIN MUTATIONS
 
 export const deleteUserAdmin = async ({ userId }: { userId: number }) => {

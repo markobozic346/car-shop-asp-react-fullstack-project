@@ -62,6 +62,8 @@ public class Car
     public CarBody CarBody { get; set; }
 
     [Required]
-    [Column(TypeName = "decimal(18, 2)")] // Ensure proper precision for decimal values
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal Price { get; set; }
+    
+    public ICollection<SavedCar> SavedByUsers { get; set; }
 }
