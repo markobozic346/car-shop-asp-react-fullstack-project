@@ -1,14 +1,9 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-
-import CarsPage from "@/pages/cars/CarsPage";
 import { PageSection } from "@/components/PageSection";
 import { TOKEN_KEY } from "@/lib/constants";
+import FavoritesPage from "@/pages/favorites/FavoritesPage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-type CarsSearchType = {
-  search: string;
-};
-
-export const Route = createFileRoute("/cars")({
+export const Route = createFileRoute("/favorites")({
   beforeLoad: async () => {
     const jwt = localStorage.getItem(TOKEN_KEY);
 
@@ -27,9 +22,11 @@ export const Route = createFileRoute("/cars")({
       search: (search.search as string) || "",
     };
   },
-  component: () => (
-    <PageSection>
-      <CarsPage />
-    </PageSection>
-  ),
+  component: () => {
+    return (
+      <PageSection>
+        <FavoritesPage />
+      </PageSection>
+    );
+  },
 });

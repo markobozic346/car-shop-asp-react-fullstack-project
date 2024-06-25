@@ -98,6 +98,15 @@ const Navigation = () => {
           >
             Cars
           </Link>
+          <Link
+            to="/favorites"
+            className="[&.active]:font-bold"
+            search={{
+              search: "",
+            }}
+          >
+            Favorites
+          </Link>
         </>
       )}
       {user?.role === "admin" && (
