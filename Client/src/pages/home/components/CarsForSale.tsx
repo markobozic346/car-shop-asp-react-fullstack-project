@@ -69,7 +69,7 @@ const CarsForSale = () => {
           key={car.id}
           car={car}
           hasFavorite={isAuth}
-          isFavorite={Boolean(favorites?.find((f) => f.id === car.id))}
+          isFavorite={Boolean(favorites?.find((f) => f.carId === car.id))}
         />
       ))}
 
