@@ -15,7 +15,7 @@ This is a monorepo containing a backend built with ASP.NET and a frontend built 
 
 ## Project Structure
 
-├── car-shop-asp-react-fullstack-project
+├── car-shop-asp-react-fullstack-project \
 │ ├── Controllers \
 │ ├── Migrations \
 │ ├── Contexts \
