@@ -6,6 +6,7 @@ import { TOKEN_KEY } from "@/lib/constants";
 
 type CarsSearchType = {
   search: string;
+  sort: string;
 };
 
 export const Route = createFileRoute("/cars")({
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/cars")({
   validateSearch: (search: Record<string, unknown>): CarsSearchType => {
     return {
       search: (search.search as string) || "",
+      sort: (search.sort as string) || "",
     };
   },
   component: () => (

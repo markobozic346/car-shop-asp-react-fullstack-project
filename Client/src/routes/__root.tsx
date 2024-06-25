@@ -94,6 +94,7 @@ const Navigation = () => {
             className="[&.active]:font-bold"
             search={{
               search: "",
+              sort: "",
             }}
           >
             Cars

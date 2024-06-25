@@ -16,7 +16,7 @@ import { Route } from "@/routes/cars";
 const PAGE_SIZE = 10;
 
 const MyCarList = () => {
-  const { search } = Route.useSearch();
+  const { search, sort } = Route.useSearch();
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
@@ -40,10 +40,25 @@ const MyCarList = () => {
     car.make.toLowerCase().includes(search.toLowerCase())
   );
 
-  const totalCars = filteredCars?.length || 0;
+  const sortedCars = filteredCars?.sort((a, b) => {
+    switch (sort) {
+      case "A-Z":
+        return a.make.localeCompare(b.make);
+      case "Z-A":
+        return b.make.localeCompare(a.make);
+      case "lowest":
+        return a.price - b.price;
+      case "highest":
+        return b.price - a.price;
+      default:
+        return 0;
+    }
+  });
+
+  const totalCars = sortedCars?.length || 0;
   const totalPages = Math.ceil(totalCars / PAGE_SIZE);
 
-  const currentCars = filteredCars?.slice(
+  const currentCars = sortedCars?.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
