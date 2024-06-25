@@ -124,3 +124,17 @@ export const updateCarBodyTypeAdmin = async ({ carBodyType }: {carBodyType: CarB
     return res.data
 
 }
+
+export const deleteFavoriteCarAdmin = async ({ carId }: { carId: number }) => {
+    const jwt = JSON.parse(localStorage.getItem(TOKEN_KEY) || "")
+
+    const res = await api({
+        endpoint: `Admin/savedcars/${carId}`, config: {
+            method: 'DELETE',
+            headers: {
+            Authorization: `Bearer ${jwt}`
+            },
+    } })
+    
+    return res.data
+}

@@ -4,6 +4,7 @@ import CarsTab from "./tabs/CarsTab";
 import UserTab from "./tabs/UserTab";
 import CarBodiesTab from "./tabs/CarBodiesTab";
 import AdminSearch from "./components/AdminSearch";
+import FavoritesTab from "./tabs/FavoritesTab";
 
 type Props = {
   className?: string;
@@ -22,6 +23,7 @@ const AdminPage = ({ className }: Props) => {
           <TabsTrigger value="users">Users</TabsTrigger>
           <TabsTrigger value="cars">Cars</TabsTrigger>
           <TabsTrigger value="car-body">Car Bodies</TabsTrigger>
+          <TabsTrigger value="favorites">Favorites</TabsTrigger>
         </TabsList>
         <TabsContent value="cars">
           <CarsTab />
@@ -31,6 +33,9 @@ const AdminPage = ({ className }: Props) => {
         </TabsContent>
         <TabsContent value="car-body">
           <CarBodiesTab />
+        </TabsContent>
+        <TabsContent value="favorites">
+          <FavoritesTab />
         </TabsContent>
       </Tabs>
     </div>

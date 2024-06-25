@@ -183,4 +183,15 @@ public class AdminController : ControllerBase
             await _adminService.DeleteCarBodyAsync(id);
             return NoContent();
         }
+        
+        [HttpDelete("savedcars/{id}")]
+        public async Task<IActionResult> DeleteSavedCar(int id)
+        {
+            var result = await _adminService.DeleteSavedCarAsync(id);
+            if (!result)
+            {
+                return NotFound("Saved car not found");
+            }
+            return NoContent();
+        }
     }

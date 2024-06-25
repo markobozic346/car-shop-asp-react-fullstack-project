@@ -6,6 +6,7 @@ export type Car = {
     price: number
     userId: number
     carBodyId: number
+    favoriteId?: number
 
 }
 

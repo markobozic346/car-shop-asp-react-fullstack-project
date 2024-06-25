@@ -115,4 +115,16 @@ public class AdminService
             await _context.SaveChangesAsync();
         }
     }
+    public async Task<bool> DeleteSavedCarAsync(int id)
+    {
+        var savedCar = await _context.SavedCars.FindAsync(id);
+        if (savedCar == null)
+        {
+            return false;
+        }
+        
+        _context.SavedCars.Remove(savedCar);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

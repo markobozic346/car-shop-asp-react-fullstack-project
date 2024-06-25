@@ -20,4 +20,5 @@ export const MUTATION_KEYS = {
     UPDATE_USER: 'update_user',
     UPDATE_CAR_BODY: 'update_car_body',
     TOGGLE_FAVORITE: 'toggle_favorite',
+    DELETE_FAVORITE: 'delete_favorite',
 }

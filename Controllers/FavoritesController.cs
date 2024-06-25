@@ -47,16 +47,17 @@ public class FavoritesController : Controller
     }
     
     [HttpGet("my")]
-    public async Task<ActionResult<List<CarDTO>>> GetMySavedCars()
+    public async Task<ActionResult<List<SavedCarDTO>>> GetMySavedCars()
     {
         var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
         var savedCars = await _context.SavedCars
             .Where(sc => sc.UserId == userId)
             .Include(sc => sc.Car)
-            .Select(sc => new CarDTO
+            .Select(sc => new SavedCarDTO
             {
-                Id = sc.Car.Id,
+                FavoriteId = sc.Id,
+                CarId = sc.Car.Id,
                 Make = sc.Car.Make,
                 Model = sc.Car.Model,
                 Year = sc.Car.Year,

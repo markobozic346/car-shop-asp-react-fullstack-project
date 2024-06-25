@@ -7,7 +7,17 @@ public class ToggleSavedCarDTO
 {
     public int CarId { get; set; }
 }
-
+public class SavedCarDTO
+{
+    public int FavoriteId { get; set; }
+    public int CarId { get; set; }
+    public string Make { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    public int UserId { get; set; }
+    public int CarBodyId { get; set; }
+    public decimal Price { get; set; }
+}
 public class SavedCar
 {
     [Key]
